@@ -1,0 +1,9 @@
+name = "ricardofort-api"
+main = "src/index.mjs"
+compatibility_date = "2024-04-03"
+
+# Despliegue de los archivos estáticos de la carpeta /public
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "single-page-application" # Si fueramos SPA, pero aquí sirve para servir index.html

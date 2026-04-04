@@ -234,6 +234,8 @@
             <div class="quote-card" id="quote-container">
                 <p class="quote-text" id="quote-text">MAAIAAMIII!</p>
                 <p class="quote-author">Ricardo Fort</p>
+                <p id="quote-origin" style="color: var(--text-dim); font-size: 0.8rem; margin-top: 5px; opacity: 0.7; font-style: italic;">Desconocido</p>
+                <a id="quote-link" href="#" target="_blank" style="display: inline-block; margin-top: 10px; color: var(--primary); font-size: 0.75rem; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s ease;">VER FUENTE →</a>
                 <button class="btn-refresh" onclick="fetchQuote()">
                     <span>🔄 NUEVA FRASE</span>
                 </button>
@@ -286,6 +288,16 @@
                 
                 setTimeout(() => {
                     textEl.innerText = data.value;
+                    document.getElementById('quote-origin').innerText = data.origin || "Desconocido";
+                    
+                    const linkEl = document.getElementById('quote-link');
+                    if (data.url) {
+                        linkEl.href = data.url;
+                        linkEl.style.display = 'inline-block';
+                    } else {
+                        linkEl.style.display = 'none';
+                    }
+                    
                     textEl.style.opacity = '1';
                     btn.style.opacity = '1';
                 }, 300);
