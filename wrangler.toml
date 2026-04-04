@@ -2,6 +2,9 @@ name = "ricardofort-api"
 main = "src/index.mjs"
 compatibility_date = "2024-04-03"
 
+# Dominio personalizado
+route = { pattern = "fortapi.lfnetwork.net", custom_domain = true }
+
 # Despliegue de los archivos estáticos de la carpeta /public
 [assets]
 directory = "./public"

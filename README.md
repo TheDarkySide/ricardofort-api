@@ -1,6 +1,6 @@
 # 🎩 Ricardo Fort API (Premium)
 
-[ricardofortapi](https://ricardofort-api.onrender.com) es una API JSON gratuita, moderna y de alto rendimiento para obtener las mejores frases de **Ricardo Fort**. Curada cuidadosamente para preservar el legado del Comandante.
+[ricardofortapi](https://fortapi.lfnetwork.net) es una API JSON gratuita, moderna y de alto rendimiento para obtener las mejores frases de **Ricardo Fort**. Curada cuidadosamente para preservar el legado del Comandante.
 
 🚀 **Nuevas mejoras:**
 - **Landing Page Stunning:** Visita la raíz de la API para ver la mística documentación interactiva.
