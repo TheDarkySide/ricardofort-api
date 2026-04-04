@@ -2,9 +2,18 @@ const { response } = require("express");
 const quotes = require("../quotes.json");
 
 const quoteGet = (req, res = response) => {
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const count = parseInt(req.query.count) || 1;
 
-  res.json(randomQuote);
+  if (count <= 1) {
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    return res.json(randomQuote);
+  }
+
+  // Shuffle and pick multiple
+  const shuffled = [...quotes].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, Math.min(count, quotes.length));
+
+  res.json(selected);
 };
 
 const searchQuotes = (req, res = response) => {
@@ -15,7 +24,7 @@ const searchQuotes = (req, res = response) => {
 
   if (filteredQuotes.length === 0) {
     return res.status(404).json({
-      msg: "No quotes found matching the query.",
+      msg: "No hay frases que coincidan con la búsqueda.",
     });
   }
 
@@ -25,7 +34,7 @@ const searchQuotes = (req, res = response) => {
   });
 };
 
-const allQuotesGet = (req, res = "response") => {
+const allQuotesGet = (req, res = response) => {
   res.json({
     total: quotes.length,
     result: quotes,
