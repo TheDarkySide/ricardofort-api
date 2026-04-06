@@ -102,6 +102,7 @@
             margin-bottom: 1rem;
             background: linear-gradient(to bottom, #fff, var(--primary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
@@ -250,7 +251,7 @@
         <header>
             <h1>Fort API</h1>
             <p class="subtitle">API REST JSON gratuita con las mejores frases del Comandante Ricardo Fort. Premium,
-                rápida y sin límites.</p>
+                rápida, verificada y sin límites. Ahora con origen y URL de cada frase icónica.</p>
         </header>
 
         <section class="quote-showcase">
@@ -289,9 +290,14 @@
                 </div>
                 <div class="doc-item">
                     <h3>Todo</h3>
-                    <p>Recupera todas las frases (50+).</p>
+                    <p>Recupera todas las frases (40+).</p>
                     <code><span class="method">GET</span> /quotes/all</code>
                 </div>
+            </div>
+            
+            <div style="margin-top: 3rem; background: rgba(139, 92, 246, 0.1); border: 1px solid var(--accent); padding: 1.5rem; border-radius: 16px; text-align: center;">
+                <p style="color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;">💎 Calidad Premium</p>
+                <p style="font-size: 0.9rem; color: var(--text-dim);">Cada frase es verificada manualmente. La respuesta JSON incluye campos <code>origin</code> (fuente original) y <code>url</code> (enlace al momento exacto).</p>
             </div>
         </section>
 
