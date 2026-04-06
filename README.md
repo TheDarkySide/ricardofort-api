@@ -16,9 +16,10 @@ Recupera una frase al azar en formato JSON.
 ```http
 GET /quotes
 ```
-**Parámetros opcionales:**
 - `count`: Número de frases a devolver (máx: total en base de datos).
   `GET /quotes?count=5`
+- `exclude`: IDs separados por comas para excluir de la selección. Útil para evitar repeticiones.
+  `GET /quotes?exclude=id1,id2`
 
 ### 🔍 Buscar Frases
 Filtra por palabras clave en el texto de la frase.
@@ -55,16 +56,16 @@ Ahora todas las frases incluyen su origen y URL verificado:
 ## 🗺️ Roadmap / Objetivos a Futuro
 - [ ] **Migración a TypeScript:** Para mayor robustez y mejor DX.
 - [ ] **Objetivo 365 Frases:** Una frase icónica para cada día del año (😎).
-- [ ] **Expandir Endpoints:** Añadir filtros por tags (ej: #Miami, #Chocolate, #Mama).
-- [ ] **Sistema de Colaboración:** Implementar una forma de sugerir/verificar frases sin depender de un Pull Request.
-- [ ] **Optimización del Azar:** Mejorar el algoritmo de selección para evitar repeticiones consecutivas (shuffling inteligente).
+- [ ] **Expandir Endpoints:** Añadir nuevos Endpoints para mejorar el filtrado.
+- [ ] **Sistema de Colaboración:** Implementar una forma de sugerir/verificar frases de forma colaborativa.
+- [x] **Optimización del Azar:** Implementado algoritmo Fisher-Yates y soporte para parámetro `exclude` (shuffling inteligente).
 - [ ] **Comandante en GIFs:** Ampliar la API para servir GIFs icónicos asociados a las frases.
-- [ ] **PostgreSQL (D1):** Migrar de un archivo JSON a una base de datos relacional para escalar y permitir el sistema colaborativo.
+- [ ] **PostgreSQL (D1):** Migrar de un archivo JSON a una base de datos relacional.
 
 ---
 
 ## 🙏 Agradecimientos
-Queremos agradecer profundamente a **Fausto Gabini** (`fausgabini`), el autor del repositorio original, sobre el cual se construyó esta versión premium. Su trabajo inicial fue la semilla que permitió que el legado del Comandante viviera en el código.
+Un agradecimiento profundamente a **Fausto Gabini** (`fausgabini`), el autor del repositorio original, sobre el cual se construyó esta versión. Su trabajo inicial fue la semilla que permitió que el legado del Comandante viviera en el código.
 
 ---
 

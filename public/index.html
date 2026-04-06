@@ -275,8 +275,8 @@
             <div class="docs-grid">
                 <div class="doc-item">
                     <h3>Frase Aleatoria</h3>
-                    <p>Obtén una frase al azar del Comandante.</p>
-                    <code><span class="method">GET</span> /quotes</code>
+                    <p>Obtén una frase al azar del Comandante. Usa <code>exclude</code> para no repetir.</p>
+                    <code><span class="method">GET</span> /quotes?exclude=id1,id2</code>
                 </div>
                 <div class="doc-item">
                     <h3>Varias Frases</h3>
@@ -314,9 +314,18 @@
             const btn = document.querySelector('.btn-refresh');
             btn.style.opacity = '0.5';
 
+            // Recuperar IDs vistos esta sesión para evitar repeticiones (Best Practice)
+            const seenIds = JSON.parse(sessionStorage.getItem('seen_fort_ids') || '[]');
+            const excludeParam = seenIds.length > 0 ? `?exclude=${seenIds.join(',')}` : '';
+
             try {
-                const response = await fetch('/quotes');
+                const response = await fetch(`/quotes${excludeParam}`);
                 const data = await response.json();
+
+                // Guardar ID para la próxima exlusión (máximo 10 para no saturar la URL)
+                seenIds.push(data.id);
+                if (seenIds.length > 10) seenIds.shift();
+                sessionStorage.setItem('seen_fort_ids', JSON.stringify(seenIds));
 
                 const textEl = document.getElementById('quote-text');
                 textEl.style.opacity = '0';
