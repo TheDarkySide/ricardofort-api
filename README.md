@@ -54,7 +54,7 @@ Ahora todas las frases incluyen su origen y URL verificado:
 ---
 
 ## 🗺️ Roadmap / Objetivos a Futuro
-- [x]] **Migración a TypeScript:** Para mayor robustez y mejor DX.
+- [x] **Migración a TypeScript:** Para mayor robustez y mejor DX.
 - [ ] **Objetivo 365 Frases:** Una frase icónica para cada día del año (😎).
 - [ ] **Expandir Endpoints:** Añadir nuevos Endpoints para mejorar el filtrado.
 - [ ] **Sistema de Colaboración:** Implementar una forma de sugerir/verificar frases de forma colaborativa.
