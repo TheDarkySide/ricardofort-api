@@ -7,18 +7,35 @@ const app = new Hono()
 // Middleware de CORS
 app.use('*', cors())
 
-// 🎲 Ruta: Frase Aleatoria (+ soporte count)
+// Fisher-Yates Shuffle para una aleatoriedad uniforme (Premium)
+const shuffle = (array) => {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
+
+// 🎲 Ruta: Frase Aleatoria (+ soporte count y exclude)
 app.get('/quotes', (c) => {
   const count = parseInt(c.req.query('count')) || 1
-  
+  const exclude = c.req.query('exclude')?.split(',') || []
+
+  // Filtramos las frases que el usuario ya vio
+  let availableQuotes = quotes.filter(q => !exclude.includes(q.id))
+
+  // Si se excluyeron todas, reiniciamos la lista para evitar errores
+  if (availableQuotes.length === 0) availableQuotes = quotes
+
   if (count <= 1) {
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
+    const randomQuote = availableQuotes[Math.floor(Math.random() * availableQuotes.length)]
     return c.json(randomQuote)
   }
 
-  // Shuffle y seleccionamos múltiples
-  const shuffled = [...quotes].sort(() => 0.5 - Math.random())
-  const selected = shuffled.slice(0, Math.min(count, quotes.length))
+  // Shuffle real y seleccionamos múltiples
+  const shuffled = shuffle(availableQuotes)
+  const selected = shuffled.slice(0, Math.min(count, availableQuotes.length))
   return c.json(selected)
 })
 
