@@ -1,5 +1,5 @@
 name = "ricardofort-api"
-main = "src/index.mjs"
+main = "src/index.ts"
 compatibility_date = "2024-04-03"
 
 # Dominio personalizado

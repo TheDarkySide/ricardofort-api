@@ -1,8 +1,11 @@
-const { response } = require("express");
-const quotes = require("../quotes.json");
+import { Request, Response } from "express";
+import quotesData from "../quotes.json";
+import { Quote } from "../src/types.ts";
+
+const quotes = quotesData as Quote[];
 
 // Fisher-Yates Shuffle Algorithm (Premium)
-const shuffleQuotes = (array) => {
+const shuffleQuotes = (array: Quote[]): Quote[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -11,9 +14,9 @@ const shuffleQuotes = (array) => {
   return shuffled;
 };
 
-const quoteGet = (req, res = response) => {
-  const count = parseInt(req.query.count) || 1;
-  const exclude = req.query.exclude ? req.query.exclude.split(",") : [];
+export const quoteGet = (req: Request, res: Response) => {
+  const count = parseInt(req.query.count as string) || 1;
+  const exclude = req.query.exclude ? (req.query.exclude as string).split(",") : [];
 
   // Filtrar frases excluidas para evitar repeticiones (Smart API)
   let filteredQuotes = quotes.filter((q) => !exclude.includes(q.id));
@@ -37,8 +40,8 @@ const quoteGet = (req, res = response) => {
   res.json(selected);
 };
 
-const searchQuotes = (req, res = response) => {
-  const query = req.query.query?.toLowerCase() || "";
+export const searchQuotes = (req: Request, res: Response) => {
+  const query = (req.query.query as string)?.toLowerCase() || "";
   const filteredQuotes = quotes.filter((quote) =>
     quote.value.toLowerCase().includes(query)
   );
@@ -55,15 +58,9 @@ const searchQuotes = (req, res = response) => {
   });
 };
 
-const allQuotesGet = (req, res = response) => {
+export const allQuotesGet = (req: Request, res: Response) => {
   res.json({
     total: quotes.length,
     result: quotes,
   });
-};
-
-module.exports = {
-  quoteGet,
-  searchQuotes,
-  allQuotesGet,
 };

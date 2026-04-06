@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   quoteGet,
   searchQuotes,
   allQuotesGet,
-} = require("../controllers/quote");
+} from "../controllers/quote.ts";
 
 const router = Router();
 
@@ -14,4 +14,4 @@ router.get("/search", searchQuotes);
 // All quotes
 router.get("/all", allQuotesGet);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,12 @@
-const express = require("express");
-const cors = require("cors");
+import express, { Application } from "express";
+import cors from "cors";
+import quoteRoutes from "../routes/quote.ts";
 
 class Server {
+  private app: Application;
+  private port: string | undefined;
+  private quotesPath: string;
+
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
@@ -23,7 +28,7 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.quotesPath, require("../routes/quote"));
+    this.app.use(this.quotesPath, quoteRoutes);
   }
 
   listen() {
@@ -33,4 +38,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+export default Server;

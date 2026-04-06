@@ -1,14 +1,16 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import quotes from '../quotes.json'
+import quotesData from '../quotes.json'
+import { Quote } from './types'
 
+const quotes = quotesData as Quote[]
 const app = new Hono()
 
 // Middleware de CORS
 app.use('*', cors())
 
 // Fisher-Yates Shuffle para una aleatoriedad uniforme (Premium)
-const shuffle = (array) => {
+const shuffle = (array: Quote[]): Quote[] => {
   const result = [...array];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -19,7 +21,7 @@ const shuffle = (array) => {
 
 // 🎲 Ruta: Frase Aleatoria (+ soporte count y exclude)
 app.get('/quotes', (c) => {
-  const count = parseInt(c.req.query('count')) || 1
+  const count = parseInt(c.req.query('count') || '1') || 1
   const exclude = c.req.query('exclude')?.split(',') || []
 
   // Filtramos las frases que el usuario ya vio
@@ -61,8 +63,5 @@ app.get('/quotes/all', (c) => {
     result: quotes
   })
 })
-
-// Nota: Las peticiones a la raíz (/) y otros estáticos serán manejados 
-// por Cloudflare Assets si no se definen aquí las rutas.
 
 export default app
